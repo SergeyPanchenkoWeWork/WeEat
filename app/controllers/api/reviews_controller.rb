@@ -1,20 +1,21 @@
-class ReviewsController < ApiController
+class Api::ReviewsController < ApiController
 
   def create
     user = User.find_by_name(params['user_name'])
 
     unless user
-        user = User.create({ name => params['user_name']})
+        user = User.create({ :name => params['user_name']})
 
         unless user
           json_error(error: 'USER_CREATE_FAILED', error_message: 'Unable to save user')
         end
     end
+
     review = Review.new({
-                               user: User,
-                               restaurant_id: params['restaurant'],
-                               rating: params['rating'],
-                               message: params['message'],
+                               :user=> user,
+                               :restaurant_id => params['restaurant'],
+                               :rating => params['rating'],
+                               :message => params['message'],
                            })
 
     if review.save
