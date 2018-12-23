@@ -6,11 +6,11 @@ class ReviewsController < ApiController
     unless user
         user = User.create({ name => params['user_name']})
 
-        unless user.save
+        unless user
           json_error(error: 'USER_CREATE_FAILED', error_message: 'Unable to save user')
         end
     end
-    review = Review.create({
+    review = Review.new({
                                user: User,
                                restaurant_id: params['restaurant'],
                                rating: params['rating'],
