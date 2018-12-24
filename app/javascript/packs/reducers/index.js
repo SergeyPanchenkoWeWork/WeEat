@@ -1,5 +1,6 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import cuisines from './cuisines';
 
 export default combineReducers({
-    stam: (state) => ({ a: 5}),
+    cuisines,
 });

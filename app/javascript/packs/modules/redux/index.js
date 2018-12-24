@@ -14,6 +14,17 @@ const init = (rootReducer) => {
     return store;
 };
 
+const createReducer = (executionMap, initState = {}) => {
+    return (state, action) => {
+        if (typeof executionMap[action.type] === 'function') {
+            return executionMap[action.type](state, action);
+        }
+
+        return initState;
+    };
+};
+
 export {
     init,
+    createReducer,
 };
