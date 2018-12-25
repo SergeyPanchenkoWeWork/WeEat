@@ -47,6 +47,10 @@ class Restaurants extends React.Component {
             />
         );
     }
+
+    componentDidMount() {
+        this.props.search({});
+    }
 }
 
 const mapStateToProps = (state) => {

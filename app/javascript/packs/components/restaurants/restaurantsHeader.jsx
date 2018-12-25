@@ -3,10 +3,10 @@ import HeaderLayout from './views/headerLayout'
 
 export default class RestaurantsHeader extends React.Component {
     state = {
-        minRating: -1,
+        minRating: null,
         cuisine: '',
         name: '',
-        maxDeliveryTime: -1,
+        maxDeliveryTime: null,
     };
 
     _executeSearch = (state) => {

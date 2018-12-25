@@ -2,7 +2,7 @@ import { executeApiCall } from './index';
 
 
 const getAllCuisines = () => {
-    return executeApiCall('api/cuisines');
+    return executeApiCall('cuisines');
 };
 
 export {

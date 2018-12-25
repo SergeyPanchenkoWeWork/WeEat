@@ -12,11 +12,11 @@ class Api::ReviewsController < ApiController
     end
 
     review = Review.new({
-                               :user=> user,
-                               :restaurant_id => params['restaurant'],
-                               :rating => params['rating'],
-                               :message => params['message'],
-                           })
+       :user=> user,
+       :restaurant_id => params['restaurant'],
+       :rating => params['rating'],
+       :message => params['message'],
+    })
 
     if review.save
       json_response(review)
