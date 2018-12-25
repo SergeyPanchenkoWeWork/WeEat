@@ -1,3 +1,4 @@
+import { isLoading, isLoaded } from './selectors';
 import { getAllCuisines } from '../../api/cuisines';
 
 const ACTIONS_NAME = {
@@ -20,12 +21,16 @@ const fetchCuisinesDone = (cuisines) => ({
 });
 
 const fetchCuisines = () => {
-    return (dispatch) => {
-        dispatch(fetchCuisinesStarted());
+    return (dispatch, getState) => {
+        const state = getState();
 
-        getAllCuisines()
-            .then((cuisines) => dispatch(fetchCuisinesDone(cuisines)))
-            .catch(() => dispatch(fetchCuisinesFailed()))
+        if (!isLoaded(state) && !isLoading(state)) {
+            dispatch(fetchCuisinesStarted());
+
+            getAllCuisines()
+                .then((cuisines) => dispatch(fetchCuisinesDone(cuisines)))
+                .catch(() => dispatch(fetchCuisinesFailed()))
+        }
     }
 };
 
