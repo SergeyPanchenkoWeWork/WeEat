@@ -6,6 +6,13 @@ const styles = theme => ({
         margin: 0,
         padding: 0,
         fontSize: '16px',
+        display: 'flex',
+        flex: '1 1 auto',
+        flexDirection: 'column',
+        textAlign: 'center',
+        fontFamily: 'roboto',
+        '-webkit-font-smoothing': 'antialiased',
+        '-moz-osx-font-smoothing': 'grayscale',
     },
 });
 
