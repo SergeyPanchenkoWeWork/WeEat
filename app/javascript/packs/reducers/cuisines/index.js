@@ -19,7 +19,7 @@ export default createReducer({
         isLoaded: true,
         isLoading: false,
     }),
-    [ACTIONS_NAME.FETCH_CUISINES_STARTED]: (state, action) => ({
+    [ACTIONS_NAME.FETCH_CUISINES_DONE]: (state, action) => ({
         ...state,
         cuisines: normalizeArrayData(action.cuisines),
         isLoaded: true,

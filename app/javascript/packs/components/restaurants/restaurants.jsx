@@ -11,17 +11,23 @@ import {
 import RestaurantsLayout from './views/restaurantsLayout';
 import MapPlaceholder from './views/mapPlaceholder';
 import ListNullstate from './views/listNullstate';
+import ListLoading from './views/listLoading';
 import RestaurantsHeader from './restaurantsHeader';
+import RestaurantsList from './restaurantsList';
 
 class Restaurants extends React.Component {
     renderList() {
-        if (this.props.restaurants.length > 0) {
+        if (!this.props.isLoaded) {
             return (
-                <ListNullstate />
+                <ListLoading />
+            );
+        } else if (this.props.restaurants.length > 0) {
+            return (
+                <RestaurantsList restaurants={this.props.restaurants} />
             );
         } else {
             return (
-                <ListNullstate/>
+                <ListNullstate />
             );
         }
     }
@@ -49,7 +55,7 @@ class Restaurants extends React.Component {
     }
 
     componentDidMount() {
-        this.props.search({});
+        this.props.search();
     }
 }
 
@@ -63,8 +69,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        search: (filters) => {
-            dispatch(searchRestaurants(filters));
+        search: (filters = {}, isInBackground = false) => {
+            dispatch(searchRestaurants(filters, isInBackground));
         },
     };
 };

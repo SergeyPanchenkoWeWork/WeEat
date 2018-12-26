@@ -8,9 +8,10 @@ const ACTIONS_NAME = {
     SEARCH_RESTAURANTS_FAILED: 'restaurants-search-failed',
 };
 
-const searchRestaurantsStarted = (filtersHash) => ({
+const searchRestaurantsStarted = (filtersHash, isInBackground) => ({
     type: ACTIONS_NAME.SEARCH_RESTAURANTS_STARTED,
     filtersHash,
+    isInBackground,
 });
 
 const searchRestaurantsFailed = (filtersHash) => ({
@@ -24,14 +25,14 @@ const searchRestaurantsDone = (restaurants, filtersHash) => ({
     filtersHash,
 });
 
-const searchRestaurants = (filters) => {
+const searchRestaurants = (filters, isInBackground) => {
     return (dispatch, getState) => {
         const currentFiltersHash = hash(filters);
         const state = getState();
         const prevFiltersHash = getFiltersHash(state);
 
         if (currentFiltersHash !== prevFiltersHash) {
-            dispatch(searchRestaurantsStarted(currentFiltersHash));
+            dispatch(searchRestaurantsStarted(currentFiltersHash, isInBackground));
 
             searchRestaurantsApi(filters)
                 .then((restaurants) => dispatch(searchRestaurantsDone(restaurants, currentFiltersHash)))

@@ -12,7 +12,7 @@ const initState = {
 export default createReducer({
     [ACTIONS_NAME.SEARCH_RESTAURANTS_STARTED]: (state, action) => ({
         ...state,
-        restaurants: initState.restaurants,
+        restaurants: action.isInBackground ? state.restaurants : initState.restaurants,
         filtersHash: action.filtersHash,
         isLoaded: false,
         isLoading: true,

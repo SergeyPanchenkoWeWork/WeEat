@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
-    nullstateText: {
+    loading: {
         display: 'flex',
         flex: '1 1 auto',
         textAlign: 'center',
@@ -12,12 +12,12 @@ const styles = theme => ({
     },
 });
 
-function ListNullstate({ classes}) {
+function ListLoading({ classes}) {
     return (
-        <div className={classes.nullstateText}>
-            No Restaurants Found.
+        <div className={classes.loading}>
+            Loading...
         </div>
     );
 }
 
-export default withStyles(styles)(ListNullstate);
+export default withStyles(styles)(ListLoading);

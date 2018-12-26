@@ -15,12 +15,12 @@ const init = (rootReducer) => {
 };
 
 const createReducer = (executionMap, initState = {}) => {
-    return (state, action) => {
+    return (state = initState, action) => {
         if (typeof executionMap[action.type] === 'function') {
             return executionMap[action.type](state, action);
         }
 
-        return initState;
+        return state;
     };
 };
 
