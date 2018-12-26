@@ -2,11 +2,31 @@ import React from 'react';
 import _ from 'lodash';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+import Search from '@material-ui/icons/Search';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const styles = theme => ({
     search: {
         color: 'white',
-    }
+        width: 500,
+        '&$cssFocused': {
+            color: 'white',
+            borderColor: 'white',
+        },
+    },
+    searchLabel: {
+        color: 'white',
+        '&$cssFocused': {
+            color: 'white',
+        },
+    },
+    notchedOutline: {
+        borderColor: 'white !important',
+    },
+    cssFocused: {
+        color: 'white',
+        borderColor: 'white',
+    },
 });
 
 class RestaurantSearch extends React.PureComponent {
@@ -45,12 +65,29 @@ class RestaurantSearch extends React.PureComponent {
     render() {
         return (
             <TextField
-                label="Name"
+                label="Search"
                 value={this.state.currentText}
                 onChange={this._handleNameChanged}
                 margin="normal"
                 variant="outlined"
-                className={this.props.classes.white}
+                InputLabelProps={{
+                    classes: {
+                        root: this.props.classes.searchLabel,
+                        focused: this.props.classes.cssFocused,
+                    },
+                }}
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <Search />
+                        </InputAdornment>
+                    ),
+                    classes: {
+                        root: this.props.classes.search,
+                        focused: this.props.classes.cssFocused,
+                        notchedOutline: this.props.classes.notchedOutline,
+                    }
+                }}
             />
         );
     }

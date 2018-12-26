@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
+import Typography from '@material-ui/core/Typography';
 import Container from '../../base/container';
 
 const styles = theme => ({
@@ -15,11 +16,12 @@ const styles = theme => ({
         display: 'flex',
         flex: '1 1 auto',
         flexDirection: 'column',
-        backgroundImage: 'url("/assets/weeat-bg.jpg")',
+        backgroundImage: 'linear-gradient(0deg, rgba(103, 103, 103, 0.2), rgba(0, 0, 0, 0.3)), url(/assets/weeat-bg.jpg)',
         backgroundColor: '#868686',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center center',
+        padding: `${theme.spacing.unit * 4}px 0`,
     },
     filtersWrapper: {
         display: 'flex',
@@ -36,21 +38,20 @@ const styles = theme => ({
         display: 'flex',
         flex: '1 1 auto',
         flexDirection: 'column',
-        margin: '20px auto',
+        margin: `${theme.spacing.unit * 2}px auto`,
         textAlign: 'center',
     },
     bannerTitle: {
         textAlign: 'center',
-        fontSize: '3em',
-        lineHeight: '3',
-        fontWeight: 'bold',
-        margin: '40px auto',
+        margin: `${theme.spacing.unit * 2}px auto`,
+        color: 'white',
+        fontWeight: 400,
     },
     bannerSubTitle: {
         textAlign: 'center',
         fontSize: '1.5em',
-        lineHeight: '1.5',
         margin: '0 auto',
+        color: 'white',
     },
 });
 
@@ -59,14 +60,16 @@ function HeaderLayout({ classes, search, filters }) {
         <div className={classes.headerWrapper}>
             <div className={classes.bannerWrapper}>
                 <div className={classes.bannerTitleWrapper}>
-                    <h1 className={classes.bannerTitle}>
+                    <Typography variant="h1" className={classes.bannerTitle}>
                         WeEat
-                    </h1>
-                    <p className={classes.subheader}>
+                    </Typography>
+                    <Typography variant="h3" component="p" className={classes.bannerSubTitle}>
                         It's 12:00 and you're hungry.
-                    </p>
+                    </Typography>
                 </div>
-                {search}
+                <Container>
+                    {search}
+                </Container>
             </div>
             <div className={classes.filtersWrapper}>
                 <Container className={classes.filtersInnerWrapper}>
