@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_26_122526) do
+ActiveRecord::Schema.define(version: 2018_12_27_143101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(version: 2018_12_26_122526) do
     t.integer "max_delivery_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "address_lat"
+    t.decimal "address_lng"
+    t.string "address_name"
     t.index ["accept_10_bis"], name: "index_restaurants_on_accept_10_bis"
     t.index ["cuisine_id"], name: "index_restaurants_on_cuisine_id"
     t.index ["max_delivery_time"], name: "index_restaurants_on_max_delivery_time"
