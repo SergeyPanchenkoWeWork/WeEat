@@ -4,6 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Star from '@material-ui/icons/Star';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -43,7 +44,9 @@ class RatingSelect extends React.Component {
                     </MenuItem>
                     {[1, 2, 3].map((rating) => (
                         <MenuItem key={rating} value={rating}>
-                            {rating}
+                            {Array.from(Array(rating)).map((val, index) => (
+                                <Star key={index} fontSize="small" />
+                            ))}
                         </MenuItem>
                     ))}
                 </Select>

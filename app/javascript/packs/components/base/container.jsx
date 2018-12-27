@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -13,9 +14,9 @@ const styles = theme => ({
     },
 });
 
-function Container({ classes, className = '', ...props }) {
+function Container({ classes, className, ...props }) {
     return (
-        <div className={`${classes.container} ${className}`} {...props} />
+        <div className={classnames(classes.container, className)} {...props} />
     );
 }
 
