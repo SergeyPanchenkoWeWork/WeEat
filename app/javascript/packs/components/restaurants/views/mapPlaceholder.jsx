@@ -8,8 +8,6 @@ const styles = theme => ({
         flexDirection: 'column',
         textAlign: 'center',
         backgroundColor: '#eeeeee',
-        width: '200px',
-        height: '200px',
     },
 });
 

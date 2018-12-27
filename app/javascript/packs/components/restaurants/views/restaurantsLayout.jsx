@@ -17,8 +17,10 @@ const styles = theme => ({
     },
     listWrapper: {
         display: 'flex',
-        flex: '0 0 200px',
+        flex: '0 0',
+        flexBasis: `calc(33% + ${theme.spacing.unit}px)`,
         flexDirection: 'column',
+        padding: `${theme.spacing.unit * 2}px 0`,
     },
     mapWrapper: {
         display: 'flex',

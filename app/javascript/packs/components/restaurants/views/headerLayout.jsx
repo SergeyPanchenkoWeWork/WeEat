@@ -18,7 +18,6 @@ const headerTheme = createMuiTheme({
 const styles = theme => ({
     headerWrapper: {
         display: 'flex',
-        flex: '1 1 auto',
         flexDirection: 'column',
         textAlign: 'center',
         color: 'white',
@@ -36,7 +35,6 @@ const styles = theme => ({
     },
     filtersWrapper: {
         display: 'flex',
-        flex: '1 1 auto',
         flexDirection: 'column',
         backgroundColor: theme.palette.primary.main,
         padding: `${theme.spacing.unit * 2}px 0`,

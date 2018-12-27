@@ -11,6 +11,7 @@ const styles = theme => ({
         flexDirection: 'column',
         textAlign: 'center',
         fontFamily: 'roboto',
+        minHeight: '100vh',
         '-webkit-font-smoothing': 'antialiased',
         '-moz-osx-font-smoothing': 'grayscale',
     },
