@@ -1,13 +1,21 @@
 import React from 'react';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { withStyles } from '@material-ui/core/styles';
 
-const EMPTY_VAL = -1;
+const styles = theme => ({
+    field: {
+        width: '100%',
+        textAlign: 'start',
+    },
+});
 
-export default class RatingSelect extends React.Component {
+const EMPTY_VAL = '';
+
+class RatingSelect extends React.Component {
     _handleChange = (event) => {
         const val = event.target.value;
         this.props.onChange(val === EMPTY_VAL ? null : val);
@@ -15,7 +23,7 @@ export default class RatingSelect extends React.Component {
 
     render () {
         return (
-            <FormControl variant="outlined">
+            <FormControl className={this.props.classes.field}>
                 <InputLabel
                     htmlFor={this.props.id}
                 >
@@ -25,13 +33,12 @@ export default class RatingSelect extends React.Component {
                     value={this.props.value === null ? EMPTY_VAL : this.props.value }
                     onChange={this._handleChange}
                     input={
-                        <OutlinedInput
-                            labelWidth={120}
+                        <Input
                             id={this.props.id}
                         />
                     }
                 >
-                    <MenuItem value={-1}>
+                    <MenuItem value={EMPTY_VAL}>
                         <em>All</em>
                     </MenuItem>
                     {[1, 2, 3].map((rating) => (
@@ -44,3 +51,5 @@ export default class RatingSelect extends React.Component {
         );
     }
 }
+
+export default withStyles(styles)(RatingSelect)

@@ -1,8 +1,19 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Container from '../../base/container';
+
+const headerTheme = createMuiTheme({
+    palette: {
+        type: 'dark',
+        primary: {
+            main: '#ffffff',
+            light: '#ffffff',
+            dark: '#ffffff',
+        },
+    },
+    typography: { useNextVariants: true },
+});
 
 const styles = theme => ({
     headerWrapper: {
@@ -27,7 +38,8 @@ const styles = theme => ({
         display: 'flex',
         flex: '1 1 auto',
         flexDirection: 'column',
-        backgroundColor: 'red',
+        backgroundColor: theme.palette.primary.main,
+        padding: `${theme.spacing.unit * 2}px 0`,
     },
     filtersInnerWrapper: {
         display: 'flex',
@@ -58,24 +70,26 @@ const styles = theme => ({
 function HeaderLayout({ classes, search, filters }) {
     return (
         <div className={classes.headerWrapper}>
-            <div className={classes.bannerWrapper}>
-                <div className={classes.bannerTitleWrapper}>
-                    <Typography variant="h1" className={classes.bannerTitle}>
-                        WeEat
-                    </Typography>
-                    <Typography variant="h3" component="p" className={classes.bannerSubTitle}>
-                        It's 12:00 and you're hungry.
-                    </Typography>
+            <MuiThemeProvider theme={headerTheme }>
+                <div className={classes.bannerWrapper}>
+                    <div className={classes.bannerTitleWrapper}>
+                        <Typography variant="h1" className={classes.bannerTitle}>
+                            WeEat
+                        </Typography>
+                        <Typography variant="h3" component="p" className={classes.bannerSubTitle}>
+                            It's 12:00 and you're hungry.
+                        </Typography>
+                    </div>
+                    <Container>
+                        {search}
+                    </Container>
                 </div>
-                <Container>
-                    {search}
-                </Container>
-            </div>
-            <div className={classes.filtersWrapper}>
-                <Container className={classes.filtersInnerWrapper}>
-                    {filters}
-                </Container>
-            </div>
+                <div className={classes.filtersWrapper}>
+                    <Container className={classes.filtersInnerWrapper}>
+                        {filters}
+                    </Container>
+                </div>
+            </MuiThemeProvider>
         </div>
     );
 }

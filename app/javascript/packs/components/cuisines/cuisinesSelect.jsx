@@ -1,11 +1,19 @@
 import React from 'react';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { withStyles } from '@material-ui/core/styles';
 
 import withCuisines from './withCuisinesHOC';
+
+const styles = theme => ({
+    field: {
+        width: '100%',
+        textAlign: 'start',
+    },
+});
 
 class CuisinesSelect extends React.Component {
     _handleChange = (event) => {
@@ -14,7 +22,7 @@ class CuisinesSelect extends React.Component {
 
     render () {
         return (
-            <FormControl variant="outlined">
+            <FormControl className={this.props.classes.field}>
                 <InputLabel
                     htmlFor={this.props.id}
                 >
@@ -24,8 +32,7 @@ class CuisinesSelect extends React.Component {
                     value={this.props.value}
                     onChange={this._handleChange}
                     input={
-                        <OutlinedInput
-                            labelWidth={120}
+                        <Input
                             id={this.props.id}
                         />
                     }
@@ -44,4 +51,4 @@ class CuisinesSelect extends React.Component {
     }
 }
 
-export default withCuisines(CuisinesSelect);
+export default withCuisines(withStyles(styles)(CuisinesSelect));

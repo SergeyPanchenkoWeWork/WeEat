@@ -9,6 +9,7 @@ const styles = theme => ({
         flex: '1 1 auto',
         flexDirection: 'column',
         maxWidth: '1100px',
+        width: '100%',
     },
 });
 
