@@ -7,6 +7,7 @@ const initState = {
     filtersHash: EMPTY_HASH,
     isLoaded: false,
     isLoading: false,
+    hasUpdated: false,
 };
 
 export default createReducer({
@@ -16,6 +17,7 @@ export default createReducer({
         filtersHash: action.filtersHash,
         isLoaded: false,
         isLoading: true,
+        hasUpdated: false,
     }),
     [ACTIONS_NAME.SEARCH_RESTAURANTS_FAILED]: (state, action) => {
         if (state.filtersHash !== action.filtersHash) {
@@ -38,6 +40,12 @@ export default createReducer({
             restaurants: action.restaurants,
             isLoaded: true,
             isLoading: false,
+        };
+    },
+    [ACTIONS_NAME.RESTAURANTS_UPDATED]: (state, action) => {
+        return {
+            ...state,
+            hasUpdated: true,
         };
     },
 }, initState);

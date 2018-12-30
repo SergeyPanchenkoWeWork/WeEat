@@ -28,7 +28,7 @@ const styles = theme => ({
     },
 });
 
-function RestaurantsLayout({ classes, header, list, map  }) {
+function RestaurantsLayout({ classes, header, list, map, children  }) {
     return (
         <div className={classes.restaurantsWrapper}>
             {header}
@@ -40,6 +40,7 @@ function RestaurantsLayout({ classes, header, list, map  }) {
                     {map}
                 </div>
             </Container>
+            {children}
         </div>
     );
 }

@@ -6,6 +6,7 @@ import {
     getRestaurants,
     isLoading,
     isLoaded,
+    hasUpdated,
 } from '../../reducers/restaurants/selectors';
 
 import RestaurantsLayout from './views/restaurantsLayout';
@@ -14,15 +15,29 @@ import ListLoading from './views/listLoading';
 import RestaurantsHeader from './restaurantsHeader';
 import RestaurantsList from './restaurantsList';
 import RestaurantsMap from '../maps/restaurantsMap';
+import CreateRestaurantModal from '../createRestaurant/createRestaurantModal';
 
 class Restaurants extends React.Component {
     state = {
         selectedRestaurant: '',
+        hasAddRestaurantModal: false,
     };
 
     _selectRestaurant = (restaurantId) => {
         this.setState({
             selectedRestaurant: restaurantId,
+        });
+    };
+
+    _openRestaurantModal = () => {
+        this.setState({
+            hasAddRestaurantModal: true,
+        });
+    };
+
+    _closeRestaurantModal = () => {
+        this.setState({
+            hasAddRestaurantModal: false,
         });
     };
 
@@ -60,7 +75,11 @@ class Restaurants extends React.Component {
 
     renderHeader() {
         return (
-            <RestaurantsHeader search={this.props.search} />
+            <RestaurantsHeader
+                search={this.props.search}
+                openCreateModal={this._openRestaurantModal}
+                hasUpdated={this.props.hasUpdated}
+            />
         );
     }
 
@@ -70,7 +89,9 @@ class Restaurants extends React.Component {
                 header={this.renderHeader()}
                 map={this.renderMap()}
                 list={this.renderList()}
-            />
+            >
+                {this.state.hasAddRestaurantModal ? <CreateRestaurantModal close={this._closeRestaurantModal} />: undefined}
+            </RestaurantsLayout>
         );
     }
 
@@ -84,6 +105,7 @@ const mapStateToProps = (state) => {
         restaurants: getRestaurants(state),
         isLoading: isLoading(state),
         isLoaded: isLoaded(state),
+        hasUpdated: hasUpdated(state),
     };
 };
 

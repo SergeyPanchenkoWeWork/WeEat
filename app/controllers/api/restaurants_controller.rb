@@ -27,7 +27,7 @@ class Api::RestaurantsController < ApiController
   end
 
   def restaurant_params
-    params.require([
+    params.permit(
       :name,
       :cuisine_id,
       :max_delivery_time,
@@ -35,6 +35,6 @@ class Api::RestaurantsController < ApiController
       :address_lat,
       :address_lng,
       :address_name
-    ])
+    )
   end
 end

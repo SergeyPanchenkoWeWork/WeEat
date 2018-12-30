@@ -1,6 +1,8 @@
 import React from 'react';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import AddIconfrom from '@material-ui/icons/AddCircleOutlineOutlined';
+import IconButton from '@material-ui/core/IconButton';
 import Container from '../../base/container';
 
 const headerTheme = createMuiTheme({
@@ -23,6 +25,7 @@ const styles = theme => ({
         color: 'white',
     },
     bannerWrapper: {
+        position: 'relative',
         display: 'flex',
         flex: '1 1 auto',
         flexDirection: 'column',
@@ -63,9 +66,17 @@ const styles = theme => ({
         margin: '0 auto',
         color: 'white',
     },
+    buttonOuterContainer: {
+        position: 'absolute',
+        width: '100%',
+        top: 0,
+    },
+    addButton: {
+        margin: `${theme.spacing.unit * 4}px 0 0 auto`,
+    },
 });
 
-function HeaderLayout({ classes, search, filters }) {
+function HeaderLayout({ classes, search, filters, openCreateModal }) {
     return (
         <div className={classes.headerWrapper}>
             <MuiThemeProvider theme={headerTheme }>
@@ -81,6 +92,13 @@ function HeaderLayout({ classes, search, filters }) {
                     <Container>
                         {search}
                     </Container>
+                    <div className={classes.buttonOuterContainer}>
+                        <Container>
+                            <IconButton color="primary" onClick={openCreateModal} className={classes.addButton} >
+                                <AddIconfrom fontSize="large" />
+                            </IconButton>
+                        </Container>
+                    </div>
                 </div>
                 <div className={classes.filtersWrapper}>
                     <Container className={classes.filtersInnerWrapper}>

@@ -9,12 +9,27 @@ const _formatParams = (params) => {
     };
 };
 
+const _formatCreateData = ({ cuisine, ...data }) => {
+    return {
+        cuisine_id: cuisine,
+        ...data,
+    };
+};
+
 const searchRestaurants = (params) => {
     return executeApiCall('restaurants', {
         params: _formatParams(params),
     });
 };
 
+const createRestaurant = (params) => {
+    return executeApiCall('restaurants', {
+        data: _formatCreateData(params),
+        method: 'POST',
+    });
+};
+
 export {
     searchRestaurants,
+    createRestaurant,
 };

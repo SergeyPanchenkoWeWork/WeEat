@@ -51,7 +51,14 @@ export default class RestaurantsHeader extends React.Component {
                     maxDeliveryTime={this.state.maxDeliveryTime}
                     maxDeliveryChanged={this._updateMaxDeliveryTime}
                 />}
+                openCreateModal={this.props.openCreateModal}
             />
         );
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.hasUpdated && !prevProps.hasUpdated) {
+            this._executeSearch();
+        }
     }
 }
