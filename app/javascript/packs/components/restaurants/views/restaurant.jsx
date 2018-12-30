@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -17,6 +18,10 @@ const styles = theme => ({
     cardContent: {
         display: 'flex',
         flex: '1 1 auto',
+        cursor: 'pointer',
+        '&.selected': {
+            backgroundColor: '#f3f3f3',
+        },
     },
     name: {
         lineHeight: 1,
@@ -42,30 +47,44 @@ const styles = theme => ({
     },
 });
 
-function Restaurant({ classes, restaurant }) {
-    return (
-        <Card className={classes.card}>
-            <CardContent className={classes.cardContent}>
-                <CuisineIcon cuisine={restaurant.cuisine_id} className={classes.iconCuisine}/>
-                <div className={classes.infoWrapper}>
-                    <div className={classes.infoTitleWrapper}>
-                        <Typography variant="h5" component="h4" className={classes.name}>
-                            {restaurant.name}
-                        </Typography>
-                        {restaurant.accept_10_bis ? <CreditCard color="primary" />: undefined}
+const _getRestaurantRatingAsArray = (rating) => {
+    return Array.from(Array(Math.floor(rating)));
+};
+
+class Restaurant extends React.PureComponent {
+    _onCardClick = () => {
+        this.props.onRestaurantClick(this.props.restaurant.id);
+    };
+
+    render() {
+        const { classes, restaurant, isSelected } = this.props;
+
+        return (
+            <Card className={classes.card}>
+                <CardContent className={classnames(classes.cardContent, {
+                    selected: isSelected,
+                })} onClick={this._onCardClick}>
+                    <CuisineIcon cuisine={restaurant.cuisine_id} className={classes.iconCuisine}/>
+                    <div className={classes.infoWrapper}>
+                        <div className={classes.infoTitleWrapper}>
+                            <Typography variant="h5" component="h4" className={classes.name}>
+                                {restaurant.name}
+                            </Typography>
+                            {restaurant.accept_10_bis ? <CreditCard color="primary"/> : undefined}
+                        </div>
+                        <div className={classes.ratingWrapper}>
+                            <Typography variant="caption" component="span" className={classes.ratingTitle}>
+                                Rating:
+                            </Typography>
+                            {_getRestaurantRatingAsArray(restaurant.rating).map((val, index) => (
+                                <Star key={index} fontSize="small" color="action"/>
+                            ))}
+                        </div>
                     </div>
-                    <div className={classes.ratingWrapper}>
-                        <Typography variant="caption" component="span" className={classes.ratingTitle}>
-                            Rating:
-                        </Typography>
-                        {Array.from(Array(Math.floor(restaurant.rating))).map((val, index) => (
-                            <Star key={index} fontSize="small" color="action" />
-                        ))}
-                    </div>
-                </div>
-            </CardContent>
-        </Card>
-    );
+                </CardContent>
+            </Card>
+        );
+    }
 }
 
 export default withStyles(styles)(Restaurant);

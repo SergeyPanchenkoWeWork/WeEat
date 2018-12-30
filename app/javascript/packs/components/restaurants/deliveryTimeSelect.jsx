@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { formatDeliveryTime } from '../../modules/formatters/restaurants';
 
 const EMPTY_VAL = '';
-const DELIVERY_TIME = [
+const DELIVERY_TIME_MS = [
     30 * 60 * 1000,
     60 * 60 * 1000,
     90 * 60 * 1000,
@@ -49,7 +49,7 @@ class DeliveryTimeSelect extends React.Component {
                     <MenuItem value={EMPTY_VAL}>
                         <em>All</em>
                     </MenuItem>
-                    {DELIVERY_TIME.map((speed) => (
+                    {DELIVERY_TIME_MS.map((speed) => (
                         <MenuItem key={speed} value={speed}>
                             {formatDeliveryTime(speed)}
                         </MenuItem>

@@ -9,32 +9,52 @@ import {
 } from '../../reducers/restaurants/selectors';
 
 import RestaurantsLayout from './views/restaurantsLayout';
-import MapPlaceholder from './views/mapPlaceholder';
 import ListNullstate from './views/listNullstate';
 import ListLoading from './views/listLoading';
 import RestaurantsHeader from './restaurantsHeader';
 import RestaurantsList from './restaurantsList';
+import RestaurantsMap from '../maps/restaurantsMap';
 
 class Restaurants extends React.Component {
+    state = {
+        selectedRestaurant: '',
+    };
+
+    _selectRestaurant = (restaurantId) => {
+        this.setState({
+            selectedRestaurant: restaurantId,
+        });
+    };
+
     renderList() {
         if (!this.props.isLoaded) {
             return (
                 <ListLoading />
             );
-        } else if (this.props.restaurants.length > 0) {
+        }
+
+        if (this.props.restaurants.length > 0) {
             return (
-                <RestaurantsList restaurants={this.props.restaurants} />
-            );
-        } else {
-            return (
-                <ListNullstate />
+                <RestaurantsList
+                    restaurants={this.props.restaurants}
+                    selected={this.state.selectedRestaurant}
+                    selectRestaurant={this._selectRestaurant}
+                />
             );
         }
+
+        return (
+            <ListNullstate />
+        );
     }
 
     renderMap() {
         return (
-            <MapPlaceholder/>
+            <RestaurantsMap
+                restaurants={this.props.restaurants}
+                selected={this.state.selectedRestaurant}
+                selectRestaurant={this._selectRestaurant}
+            />
         );
     }
 
