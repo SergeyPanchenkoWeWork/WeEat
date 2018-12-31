@@ -11,8 +11,8 @@ export default class RestaurantsHeader extends React.Component {
         maxDeliveryTime: null,
     };
 
-    _executeSearch = () => {
-        this.props.search(this.state, true);
+    _executeSearch = (isForced = false) => {
+        this.props.search(this.state, { isForced, isInBackground: true });
     };
 
     _updateName = (newName) => {
@@ -58,7 +58,7 @@ export default class RestaurantsHeader extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.hasUpdated && !prevProps.hasUpdated) {
-            this._executeSearch();
+            this._executeSearch(true);
         }
     }
 }

@@ -12,6 +12,7 @@ export default class RestaurantsList extends React.PureComponent {
                         restaurant={restaurant}
                         isSelected={this.props.selected === restaurant.id}
                         onRestaurantClick={this.props.selectRestaurant}
+                        openReviewModal={this.props.openReviewModal}
                     />
                 ))}
             </React.Fragment>

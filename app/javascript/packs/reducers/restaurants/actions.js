@@ -26,13 +26,13 @@ const searchRestaurantsDone = (restaurants, filtersHash) => ({
     filtersHash,
 });
 
-const searchRestaurants = (filters, isInBackground) => {
+const searchRestaurants = (filters, { isInBackground, isForced }) => {
     return (dispatch, getState) => {
         const currentFiltersHash = hash(filters);
         const state = getState();
         const prevFiltersHash = getFiltersHash(state);
 
-        if (currentFiltersHash !== prevFiltersHash) {
+        if (isForced || currentFiltersHash !== prevFiltersHash) {
             dispatch(searchRestaurantsStarted(currentFiltersHash, isInBackground));
 
             searchRestaurantsApi(filters)

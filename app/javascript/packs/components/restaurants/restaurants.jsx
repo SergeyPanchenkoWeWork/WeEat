@@ -16,11 +16,14 @@ import RestaurantsHeader from './restaurantsHeader';
 import RestaurantsList from './restaurantsList';
 import RestaurantsMap from '../maps/restaurantsMap';
 import CreateRestaurantModal from '../createRestaurant/createRestaurantModal';
+import CreateReviewModal from '../createReview/createReviewModal';
 
 class Restaurants extends React.Component {
     state = {
         selectedRestaurant: '',
-        hasAddRestaurantModal: false,
+        hasCreateRestaurantModal: false,
+        hasCreateReviewModal: false,
+        reviewForRestaurant: null,
     };
 
     _selectRestaurant = (restaurantId) => {
@@ -31,13 +34,27 @@ class Restaurants extends React.Component {
 
     _openRestaurantModal = () => {
         this.setState({
-            hasAddRestaurantModal: true,
+            hasCreateRestaurantModal: true,
         });
     };
 
     _closeRestaurantModal = () => {
         this.setState({
-            hasAddRestaurantModal: false,
+            hasCreateRestaurantModal: false,
+        });
+    };
+
+    _openReviewModal = (restaurant) => {
+        this.setState({
+            hasCreateReviewModal: true,
+            reviewForRestaurant: restaurant,
+        });
+    };
+
+    _closeReviewModal = () => {
+        this.setState({
+            hasCreateReviewModal: false,
+            reviewForRestaurant: null,
         });
     };
 
@@ -54,6 +71,7 @@ class Restaurants extends React.Component {
                     restaurants={this.props.restaurants}
                     selected={this.state.selectedRestaurant}
                     selectRestaurant={this._selectRestaurant}
+                    openReviewModal={this._openReviewModal}
                 />
             );
         }
@@ -90,7 +108,8 @@ class Restaurants extends React.Component {
                 map={this.renderMap()}
                 list={this.renderList()}
             >
-                {this.state.hasAddRestaurantModal ? <CreateRestaurantModal close={this._closeRestaurantModal} />: undefined}
+                {this.state.hasCreateRestaurantModal ? <CreateRestaurantModal close={this._closeRestaurantModal} />: undefined}
+                {this.state.hasCreateReviewModal ? <CreateReviewModal close={this._closeReviewModal} restaurant={this.state.reviewForRestaurant} />: undefined}
             </RestaurantsLayout>
         );
     }
@@ -111,8 +130,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        search: (filters = {}, isInBackground = false) => {
-            dispatch(searchRestaurants(filters, isInBackground));
+        search: (filters = {}, { isInBackground = false, isForced = false } = {}) => {
+            dispatch(searchRestaurants(filters, { isInBackground, isForced }));
         },
     };
 };

@@ -5,6 +5,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Star from '@material-ui/icons/Star';
 import CreditCard from '@material-ui/icons/CreditCard';
+import AddIconfrom from '@material-ui/icons/AddCircleOutlineOutlined';
+import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 
 import CuisineIcon from '../../cuisines/cuisineIcon';
@@ -45,6 +47,9 @@ const styles = theme => ({
         fontSize: '72px',
         margin: `auto ${theme.spacing.unit * 2}px`,
     },
+    addButton: {
+        margin: `auto ${theme.spacing.unit}px`,
+    },
 });
 
 const _getRestaurantRatingAsArray = (rating) => {
@@ -54,6 +59,10 @@ const _getRestaurantRatingAsArray = (rating) => {
 class Restaurant extends React.PureComponent {
     _onCardClick = () => {
         this.props.onRestaurantClick(this.props.restaurant.id);
+    };
+
+    _handleAddClick = () => {
+       this.props.openReviewModal(this.props.restaurant);
     };
 
     render() {
@@ -82,6 +91,9 @@ class Restaurant extends React.PureComponent {
                         </div>
                     </div>
                 </CardContent>
+                <IconButton color="primary" onClick={this._handleAddClick} className={classes.addButton} >
+                    <AddIconfrom fontSize="large" />
+                </IconButton>
             </Card>
         );
     }
