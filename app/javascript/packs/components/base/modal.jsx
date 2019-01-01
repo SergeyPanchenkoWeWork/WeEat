@@ -43,6 +43,8 @@ export default function Modal(props) {
             open={true}
             TransitionComponent={Transition}
             onClose={props.close}
+            fullWidth={true}
+            maxWidth="xs"
         >
             <DialogTitle onClose={props.close}>
                 {props.title}

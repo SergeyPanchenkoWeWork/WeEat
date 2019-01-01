@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import { withSnackbar } from 'notistack';
 
@@ -12,6 +11,7 @@ import { validate, hasError } from '../../modules/validation';
 import { requiredValidation } from '../../modules/validation/validations';
 
 import RatingSelect from '../restaurants/ratingSelect';
+import FormGroup from '../base/forms/formGroup';
 
 const validationMap = {
     user_name: requiredValidation,
@@ -86,8 +86,9 @@ class CreateReviewForm extends React.PureComponent {
                         value={this.state.values.user_name}
                         onChange={this._getHandleChange('user_name')}
                         helperText={this.state.errors.user_name}
-                        error={this.state.errors.user_name ? true : false}
+                        error={!!this.state.errors.user_name}
                         required
+                        fullWidth
                     />
                 </FormGroup>
                 <FormGroup>
@@ -96,8 +97,9 @@ class CreateReviewForm extends React.PureComponent {
                         onChange={this._getHandleSelectChange('rating')}
                         value={this.state.values.rating}
                         helperText={this.state.errors.rating}
-                        error={this.state.errors.rating ? true : false}
+                        error={!!this.state.errors.rating}
                         required
+                        fullWidth
                         hasPlaceholder={false}
                     />
                 </FormGroup>
@@ -109,10 +111,11 @@ class CreateReviewForm extends React.PureComponent {
                         rowsMax="4"
                         onChange={this._getHandleChange('message')}
                         helperText={this.state.errors.message}
-                        error={this.state.errors.message ? true : false}
+                        error={!!this.state.errors.message}
+                        fullWidth
                     />
                 </FormGroup>
-                <FormGroup row>
+                <FormGroup extraPadding>
                     <Button onClick={this._handleSubmit} color="primary" variant="contained" disabled={this.props.isLoading}>
                         Save
                     </Button>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 import { withSnackbar } from 'notistack';
 
 import { isLoaded, isLoading} from '../../reducers/createRestaurant/selectors';
@@ -15,6 +15,13 @@ import { requiredValidation } from '../../modules/validation/validations';
 
 import DeliveryTimeSelect from '../restaurants/deliveryTimeSelect';
 import CuisinesSelect from '../cuisines/cuisinesSelect';
+import FormGroup from '../base/forms/formGroup';
+
+const styles = (theme) => ({
+    textField: {
+        marginRight: theme.spacing.unit * 3
+    },
+});
 
 const validationMap = {
     name: requiredValidation,
@@ -104,25 +111,25 @@ class CreateRestaurantForm extends React.PureComponent {
         return (
             <form noValidate autoComplete="off" onSubmit={this._handleSubmit}>
                 <FormGroup>
-                <TextField
-                    label="Name"
-                    value={this.state.values.name}
-                    onChange={this._getHandleChange('name')}
-                    helperText={this.state.errors.name}
-                    error={this.state.errors.name ? true : false}
-                    required
-                />
+                    <TextField
+                        label="Name"
+                        value={this.state.values.name}
+                        onChange={this._getHandleChange('name')}
+                        helperText={this.state.errors.name}
+                        error={!!this.state.errors.name}
+                        required
+                    />
                 </FormGroup>
                 <FormGroup>
-                <CuisinesSelect
-                    id="restaurant-create-cuisines-select"
-                    onChange={this._getHandleSelectChange('cuisine')}
-                    value={this.state.values.cuisine}
-                    helperText={this.state.errors.cuisine}
-                    error={this.state.errors.cuisine ? true : false}
-                    required
-                    hasPlaceholder={false}
-                />
+                    <CuisinesSelect
+                        id="restaurant-create-cuisines-select"
+                        onChange={this._getHandleSelectChange('cuisine')}
+                        value={this.state.values.cuisine}
+                        helperText={this.state.errors.cuisine}
+                        error={!!this.state.errors.cuisine}
+                        required
+                        hasPlaceholder={false}
+                    />
                 </FormGroup>
                 <FormGroup>
                     <DeliveryTimeSelect
@@ -130,7 +137,7 @@ class CreateRestaurantForm extends React.PureComponent {
                         onChange={this._getHandleSelectChange('max_delivery_time')}
                         value={this.state.values.max_delivery_time}
                         helperText={this.state.errors.max_delivery_time}
-                        error={this.state.errors.max_delivery_time ? true : false}
+                        error={!!this.state.errors.max_delivery_time}
                         required
                         hasPlaceholder={false}
                     />
@@ -141,35 +148,36 @@ class CreateRestaurantForm extends React.PureComponent {
                         value={this.state.values.address_name}
                         onChange={this._getHandleChange('address_name')}
                         helperText={this.state.errors.address_name}
-                        error={this.state.errors.address_name ? true : false}
-                        required
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <TextField
-                        label="Address Latitude"
-                        value={this.state.values.address_lat}
-                        onChange={this._getHandleChange('address_lat')}
-                        helperText={this.state.errors.address_lat}
-                        error={this.state.errors.address_lat ? true : false}
-                        InputProps={{
-                            type: 'number'
-                        }}
-                        required
-                    />
-                    <TextField
-                        label="Address Longitude"
-                        value={this.state.values.address_lng}
-                        onChange={this._getHandleChange('address_lng')}
-                        helperText={this.state.errors.address_lng}
-                        error={this.state.errors.address_lng ? true : false}
-                        InputProps={{
-                            type: 'number'
-                        }}
+                        error={!!this.state.errors.address_name}
                         required
                     />
                 </FormGroup>
                 <FormGroup row>
+                    <TextField
+                        label="Latitude"
+                        value={this.state.values.address_lat}
+                        onChange={this._getHandleChange('address_lat')}
+                        helperText={this.state.errors.address_lat}
+                        error={!!this.state.errors.address_lat}
+                        InputProps={{
+                            type: 'number'
+                        }}
+                        required
+                        className={this.props.classes.textField}
+                    />
+                    <TextField
+                        label="Longitude"
+                        value={this.state.values.address_lng}
+                        onChange={this._getHandleChange('address_lng')}
+                        helperText={this.state.errors.address_lng}
+                        error={!!this.state.errors.address_lng}
+                        InputProps={{
+                            type: 'number'
+                        }}
+                        required
+                    />
+                </FormGroup>
+                <FormGroup>
                     <FormControlLabel
                         control={
                             <Checkbox
@@ -182,7 +190,7 @@ class CreateRestaurantForm extends React.PureComponent {
                         label="Accept 10Bis"
                     />
                 </FormGroup>
-                <FormGroup row>
+                <FormGroup extraPadding>
                     <Button onClick={this._handleSubmit} color="primary" variant="contained" disabled={this.props.isLoading}>
                         Save
                     </Button>
@@ -217,4 +225,4 @@ const mapDispatchToProps = {
     restaurantsUpdated: restaurantsUpdated,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withSnackbar(CreateRestaurantForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withSnackbar(CreateRestaurantForm)));
