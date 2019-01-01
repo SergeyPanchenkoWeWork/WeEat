@@ -6,26 +6,9 @@ import Search from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 const styles = theme => ({
-    search: {
-        color: 'white',
+    field: {
+        margin: '0 auto',
         width: 500,
-        '&$cssFocused': {
-            color: 'white',
-            borderColor: 'white',
-        },
-    },
-    searchLabel: {
-        color: 'white',
-        '&$cssFocused': {
-            color: 'white',
-        },
-    },
-    notchedOutline: {
-        borderColor: 'white !important',
-    },
-    cssFocused: {
-        color: 'white',
-        borderColor: 'white',
     },
 });
 
@@ -70,23 +53,13 @@ class RestaurantSearch extends React.PureComponent {
                 onChange={this._handleNameChanged}
                 margin="normal"
                 variant="outlined"
-                InputLabelProps={{
-                    classes: {
-                        root: this.props.classes.searchLabel,
-                        focused: this.props.classes.cssFocused,
-                    },
-                }}
+                className={this.props.classes.field}
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
                             <Search />
                         </InputAdornment>
                     ),
-                    classes: {
-                        root: this.props.classes.search,
-                        focused: this.props.classes.cssFocused,
-                        notchedOutline: this.props.classes.notchedOutline,
-                    }
                 }}
             />
         );

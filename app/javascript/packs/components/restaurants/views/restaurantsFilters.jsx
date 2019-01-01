@@ -1,15 +1,16 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 import CuisinesSelect from '../../cuisines/cuisinesSelect';
 import RatingSelect from '../ratingSelect';
 import DeliveryTimeSelect from '../deliveryTimeSelect';
 
 const styles = theme => ({
-    filtersWrapper: {
+    root: {
         display: 'flex',
         flexDirection: 'row',
-        flex: '1 1 auto',
+        flexGrow: 1,
     },
 });
 
@@ -18,23 +19,29 @@ class RestaurantFilters extends React.PureComponent {
         const { classes  } = this.props;
 
         return (
-           <div className={classes.filtersWrapper}>
-                <CuisinesSelect
-                    id="filters-cuisines-select"
-                    onChange={this.props.cuisineChanged}
-                    value={this.props.cuisine}
-                />
-                <RatingSelect
-                    id="filters-rating-select"
-                    onChange={this.props.minRatingChanged}
-                    value={this.props.minRating}
-                />
-               <DeliveryTimeSelect
-                    id="filters-delivery-time-select"
-                    onChange={this.props.maxDeliveryChanged}
-                    value={this.props.maxDeliveryTime}
-                />
-           </div>
+            <Grid container className={classes.root} spacing={16}>
+                <Grid item xs={4}>
+                    <CuisinesSelect
+                        id="filters-cuisines-select"
+                        onChange={this.props.cuisineChanged}
+                        value={this.props.cuisine}
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <RatingSelect
+                        id="filters-rating-select"
+                        onChange={this.props.minRatingChanged}
+                        value={this.props.minRating}
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <DeliveryTimeSelect
+                        id="filters-delivery-time-select"
+                        onChange={this.props.maxDeliveryChanged}
+                        value={this.props.maxDeliveryTime}
+                    />
+                </Grid>
+            </Grid>
         );
     }
 

@@ -17,8 +17,10 @@ const styles = theme => ({
     },
     listWrapper: {
         display: 'flex',
-        flex: '0 0 200px',
+        flex: '0 0',
+        flexBasis: `calc(33% + ${theme.spacing.unit}px)`,
         flexDirection: 'column',
+        padding: `${theme.spacing.unit * 2}px 0`,
     },
     mapWrapper: {
         display: 'flex',
@@ -26,7 +28,7 @@ const styles = theme => ({
     },
 });
 
-function RestaurantsLayout({ classes, header, list, map  }) {
+function RestaurantsLayout({ classes, header, list, map, children  }) {
     return (
         <div className={classes.restaurantsWrapper}>
             {header}
@@ -38,6 +40,7 @@ function RestaurantsLayout({ classes, header, list, map  }) {
                     {map}
                 </div>
             </Container>
+            {children}
         </div>
     );
 }

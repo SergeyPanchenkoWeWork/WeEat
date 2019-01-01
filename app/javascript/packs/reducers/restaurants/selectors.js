@@ -22,9 +22,15 @@ const isLoaded = createSelector(
     (restaurantsState) => restaurantsState.isLoaded
 );
 
+const hasUpdated = createSelector(
+    [ getRestaurantsStore ],
+    (restaurantsState) => restaurantsState.hasUpdated
+);
+
 export {
     getRestaurants,
     getFiltersHash,
     isLoading,
     isLoaded,
+    hasUpdated,
 };

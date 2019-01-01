@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :cuisines, :only => [:index]
-    resources :restaurants, :only => [:index]
+    resources :restaurants, :only => [:index, :create]
     resources :reviews, :only => [:create, :update, :destroy]
   end
 

@@ -6,6 +6,7 @@ const ACTIONS_NAME = {
     SEARCH_RESTAURANTS_STARTED: 'restaurants-search-started',
     SEARCH_RESTAURANTS_DONE: 'restaurants-search-done',
     SEARCH_RESTAURANTS_FAILED: 'restaurants-search-failed',
+    RESTAURANTS_UPDATED: 'restaurants_updated',
 };
 
 const searchRestaurantsStarted = (filtersHash, isInBackground) => ({
@@ -25,13 +26,13 @@ const searchRestaurantsDone = (restaurants, filtersHash) => ({
     filtersHash,
 });
 
-const searchRestaurants = (filters, isInBackground) => {
+const searchRestaurants = (filters, { isInBackground, isForced }) => {
     return (dispatch, getState) => {
         const currentFiltersHash = hash(filters);
         const state = getState();
         const prevFiltersHash = getFiltersHash(state);
 
-        if (currentFiltersHash !== prevFiltersHash) {
+        if (isForced || currentFiltersHash !== prevFiltersHash) {
             dispatch(searchRestaurantsStarted(currentFiltersHash, isInBackground));
 
             searchRestaurantsApi(filters)
@@ -41,7 +42,14 @@ const searchRestaurants = (filters, isInBackground) => {
     }
 };
 
+const restaurantsUpdated = () => {
+    return {
+        type: ACTIONS_NAME.RESTAURANTS_UPDATED,
+    };
+};
+
 export {
     ACTIONS_NAME,
     searchRestaurants,
+    restaurantsUpdated,
 };
