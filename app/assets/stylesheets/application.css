@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+@font-face{
+    font-family: 'ef_cuisinesregular';
+    src: url('/assets/efcuisines-regular-webfont.eot');
+    src: url('/assets/efcuisines-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/assets/efcuisines-regular-webfont.woff') format('woff'),
+    url('/assets/efcuisines-regular-webfont.ttf') format('truetype'),
+    url('/assets/efcuisines-regular-webfont.svg#ef_cuisinesregular') format('svg');
+    font-style: normal;
+    font-weight: normal;
+}
