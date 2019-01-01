@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
+import { withSnackbar } from 'notistack';
 
 import { isLoaded, isLoading} from '../../reducers/createReview/selectors';
 import { clearData, createReview } from '../../reducers/createReview/actions';
@@ -123,6 +124,7 @@ class CreateReviewForm extends React.PureComponent {
     componentDidUpdate(prevProps) {
         if (this.props.isLoaded && this.props.isLoaded !== prevProps.isLoaded) {
             this.props.restaurantsUpdated();
+            this.props.enqueueSnackbar('WOW, That feedback was AMAZING!', { variant: 'success' });
             this.props.closeModal();
         }
     }
@@ -145,4 +147,4 @@ const mapDispatchToProps = {
     restaurantsUpdated: restaurantsUpdated,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateReviewForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withSnackbar(CreateReviewForm));

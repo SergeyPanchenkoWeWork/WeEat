@@ -5,6 +5,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import { withSnackbar } from 'notistack';
 
 import { isLoaded, isLoading} from '../../reducers/createRestaurant/selectors';
 import { clearData, createRestaurant } from '../../reducers/createRestaurant/actions';
@@ -193,6 +194,7 @@ class CreateRestaurantForm extends React.PureComponent {
     componentDidUpdate(prevProps) {
         if (this.props.isLoaded && this.props.isLoaded !== prevProps.isLoaded) {
             this.props.restaurantsUpdated();
+            this.props.enqueueSnackbar('New restaurant is ready for order!!', { variant: 'success' });
             this.props.closeModal();
         }
     }
@@ -215,4 +217,4 @@ const mapDispatchToProps = {
     restaurantsUpdated: restaurantsUpdated,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateRestaurantForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withSnackbar(CreateRestaurantForm));
