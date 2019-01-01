@@ -16,14 +16,14 @@ const styles = theme => ({
     card: {
         display: 'flex',
         margin: `${theme.spacing.unit}px`,
+        '&.selected': {
+            backgroundColor: '#f3f3f3',
+        },
     },
     cardContent: {
         display: 'flex',
         flex: '1 1 auto',
         cursor: 'pointer',
-        '&.selected': {
-            backgroundColor: '#f3f3f3',
-        },
     },
     name: {
         lineHeight: 1,
@@ -69,10 +69,10 @@ class Restaurant extends React.PureComponent {
         const { classes, restaurant, isSelected } = this.props;
 
         return (
-            <Card className={classes.card}>
-                <CardContent className={classnames(classes.cardContent, {
-                    selected: isSelected,
-                })} onClick={this._onCardClick}>
+            <Card className={classnames(classes.card, {
+                selected: isSelected,
+            })}>
+                <CardContent className={classes.cardContent} onClick={this._onCardClick}>
                     <CuisineIcon cuisine={restaurant.cuisine_id} className={classes.iconCuisine}/>
                     <div className={classes.infoWrapper}>
                         <div className={classes.infoTitleWrapper}>
